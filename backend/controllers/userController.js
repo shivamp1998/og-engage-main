@@ -6,7 +6,7 @@ try {
     
     const {username,email, company, password, confirmpassword} = req.body;
 
-   
+    if(password === confirmpassword) {
     const createUser= new Register(
         {
            username,
@@ -17,7 +17,10 @@ try {
         })
     const response = await createUser.save();
     res.send(response)
-} catch (error) {
+    } else {
+        res.send("Password are not matching");
+    }
+ } catch (error) {
     console.log(error);
     res.sendStatus(404)
 }
